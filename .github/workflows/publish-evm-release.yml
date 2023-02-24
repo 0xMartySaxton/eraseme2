@@ -25,16 +25,13 @@ jobs:
       - name: jujutsu2
         run: echo '${{ steps.juju.outputs.gitTag }}'
 
-      - name: Dump event release tag name
-        uses: actions/checkout@v2
-        id: drt
-        run: echo '${{ github.event.release.tag_name }}'
 
-      # - name: get-npm-version
-      #   id: package-version
-      #   uses: martinbeentjes/npm-get-version-action@main
-      #   with:
-      #     path: evm
+      - name: get-npm-version
+        id: package-version
+        uses: actions/checkout@v2
+        uses: martinbeentjes/npm-get-version-action@main
+        with:
+          path: evm
 
       # - name: Compare release tag with package.json version
       #   id: compare_package_json_version

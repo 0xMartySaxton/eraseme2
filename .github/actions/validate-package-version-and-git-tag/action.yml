@@ -20,6 +20,12 @@ runs:
     #   id: compare_package_json_version
     #   run: echo '${{ steps.package-version.outputs.current-version }}'
 
+    - name: print versions
+      shell: bash
+      run: |
+        echo gitTag  = ${{steps.juju.outputs.gitTag}}
+        echo package = ${{steps.package-version.outputs.current-version}}
+
     - name: abort if tag doesn't match package version
       if: ${{steps.juju.outputs.gitTag != steps.package-version.outputs.current-version}}
       shell: bash

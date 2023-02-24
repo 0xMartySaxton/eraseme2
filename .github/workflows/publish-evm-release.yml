@@ -1,0 +1,56 @@
+name: Publish NPM Release
+on:
+  push
+  # release:
+  #   types: [published]
+
+jobs:
+  dump_contexts_to_log:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Dump event release tag name
+        id: drt
+        run: echo '${{ github.event.release.tag_name }}'
+      - name: get-npm-version
+        id: package-version
+        uses: martinbeentjes/npm-get-version-action@main
+        with:
+          path: foo
+
+      - name: Compare release tag with package.json version
+        id: compare_package_json_version
+        run: echo '${{ steps.package-version.outputs.current-version }}'
+
+      - name: if not match
+        if: ${{github.event.release.tag_name != steps.package-version.outputs.current-version}}
+        run: echo "abortThisJob"
+
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - uses: pnpm/action-setup@v2
+        name: Install pnpm
+        id: pnpm-install
+        with:
+          version: 7
+          run_install: false
+
+      - name: Get pnpm store directory
+        id: pnpm-cache
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+
+      - uses: actions/cache@v3
+        name: Setup pnpm cache
+        with:
+          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: build
+        run: cd evm && pnpm install --filter . && pnpm run build

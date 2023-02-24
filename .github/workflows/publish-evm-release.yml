@@ -20,13 +20,15 @@ jobs:
         run: |
           gitTag=`bash -c '[[ ${{ github.ref }} =~ evm-(.*) ]]; echo ${BASH_REMATCH[1]}'`
           echo gitTag=$gitTag >> "$GITHUB_OUTPUT"
+
       - name: jujutsu2
         run: echo '${{ steps.juju.outputs.gitTag }}'
 
       - name: Dump event release tag name
-      - uses: actions/checkout@v2
+        uses: actions/checkout@v2
         id: drt
         run: echo '${{ github.event.release.tag_name }}'
+
       - name: get-npm-version
         id: package-version
         uses: martinbeentjes/npm-get-version-action@main

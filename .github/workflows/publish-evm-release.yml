@@ -54,3 +54,6 @@ jobs:
 
       - name: build
         run: cd evm && pnpm install --filter . && pnpm run build
+      
+      - name: publish
+        run: cd evm && pnpm publish --dry-run

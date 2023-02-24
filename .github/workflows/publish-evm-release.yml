@@ -13,13 +13,14 @@ jobs:
 
       - name: Dump GitHub context
         id: github_context_step
-        run: echo '${{ toJSON(github) }}'
+          #run: echo '${{ toJSON(github) }}'
+        run: echo '${{ github.ref }}'
 
       - uses: actions-ecosystem/action-regex-match@v2
         id: regex-match
         with:
           text: ${{ github.ref }}
-          regex: '^/refs/tags/evm-(.*)$'          
+          regex: '.*evm-(.*)'          
       
       - name: print match
         run: echo '${{ steps.regex-match.outputs.group1 }}'

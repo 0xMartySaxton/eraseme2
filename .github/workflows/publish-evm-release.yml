@@ -16,14 +16,10 @@ jobs:
           #run: echo '${{ toJSON(github) }}'
         run: echo '${{ github.ref }}'
 
-      - uses: actions-ecosystem/action-regex-match@v2
-        id: regex-match
-        with:
-          text: ${{ github.ref }}
-          regex: '.*evm-(.*)'          
-      
-      - name: print match
-        run: echo '${{ steps.regex-match.outputs.group1 }}'
+      - name: Dump GitHub context
+        id: github_context_step
+          #run: echo '${{ toJSON(github) }}'
+        run: bash -c '[[ ${{ github.ref }} =~ evm-(.*) ]]; echo ${BASH_REMATCH[1]}' 
 
       - name: eraseme
         run: abortThisJob

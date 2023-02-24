@@ -9,26 +9,22 @@ jobs:
   dump_contexts_to_log:
     runs-on: ubuntu-latest
     steps:
-      - name: Dump GitHub context
-        id:
-          github_context_step
-          #run: echo '${{ toJSON(github) }}'
-        run: echo '${{ github.ref }}'
+      # - name: Dump GitHub context
+      #   id:
+      #     github_context_step
+      #     #run: echo '${{ toJSON(github) }}'
+      #   run: echo '${{ github.ref }}'
 
-      - name: jujutsu
+      - name: Extract version from tag
         id: juju
         run: |
           gitTag=`bash -c '[[ ${{ github.ref }} =~ evm-(.*) ]]; echo ${BASH_REMATCH[1]}'`
           echo gitTag=$gitTag >> "$GITHUB_OUTPUT"
       - name: jujutsu2
         run: echo '${{ steps.juju.outputs.gitTag }}'
-          
 
-      - name: eraseme
-        run: abortThisJob
-
-      - uses: actions/checkout@v2
       - name: Dump event release tag name
+      - uses: actions/checkout@v2
         id: drt
         run: echo '${{ github.event.release.tag_name }}'
       - name: get-npm-version
@@ -43,7 +39,14 @@ jobs:
 
       - name: if not match
         if: ${{github.event.release.tag_name != steps.package-version.outputs.current-version}}
-        run: echo "abortThisJob"
+        run: echo "not match "
+
+      - name: if match
+        if: ${{github.event.release.tag_name == steps.package-version.outputs.current-version}}
+        run: echo "match "
+
+      - name: aasdf
+        run: dummyCommandToAbortThisJob
 
       - name: Install Node.js
         uses: actions/setup-node@v3

@@ -1,0 +1,15 @@
+{
+  "projects": {
+    "default": "freemarketprotocol"
+  },
+  "targets": {
+    "freemarketprotocol": {
+      "hosting": {
+        "newwave": [
+          "newwave"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}

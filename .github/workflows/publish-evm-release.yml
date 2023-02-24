@@ -56,4 +56,6 @@ jobs:
         run: cd evm && pnpm install --filter . && pnpm run build
       
       - name: publish
-        run: cd evm && pnpm publish --dry-run
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          run: cd evm && pnpm publish --dry-run

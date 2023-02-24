@@ -8,6 +8,20 @@ jobs:
   dump_contexts_to_log:
     runs-on: ubuntu-latest
     steps:
+
+      - name: Dump GitHub context
+        id: github_context_step
+        run: echo '${{ toJSON(github) }}'
+
+      - uses: actions-ecosystem/action-regex-match@v2
+        id: regex-match
+        with:
+          text: ${{ github.event.comment.body }}
+          regex: '^/label\s*(.*?)\s*$'          
+
+      - name: eraseme
+        runs: abortThisJob
+
       - uses: actions/checkout@v2
       - name: Dump event release tag name
         id: drt

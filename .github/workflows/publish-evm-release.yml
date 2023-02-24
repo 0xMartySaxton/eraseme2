@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: ./validate-package-version-and-git-tag
+      - uses: ./.github/actions/validate-package-version-and-git-tag
 
       - name: eraseme
         run: dummyCommandToAbortThisJob

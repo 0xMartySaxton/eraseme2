@@ -58,4 +58,4 @@ jobs:
       - name: publish
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-          run: cd evm && pnpm publish --dry-run
+        run: cd evm && pnpm publish --dry-run

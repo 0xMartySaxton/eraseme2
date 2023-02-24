@@ -3,5 +3,24 @@ description: "Greet someone"
 runs:
   using: "composite"
   steps:
-    - run: echo Hello
+    - name: Extract version from tag
+      id: juju
       shell: bash
+      run: |
+        gitTag=`bash -c '[[ ${{ github.ref }} =~ evm-(.*) ]]; echo ${BASH_REMATCH[1]}'`
+        echo gitTag=$gitTag >> "$GITHUB_OUTPUT"
+
+    - name: get-npm-version
+      id: package-version
+      uses: martinbeentjes/npm-get-version-action@main
+      with:
+        path: evm
+
+    # - name: Compare release tag with package.json version
+    #   id: compare_package_json_version
+    #   run: echo '${{ steps.package-version.outputs.current-version }}'
+
+    - name: abort if tag doesn't match package version
+      if: ${{steps.juju.outputs.gitTag != steps.package-version.outputs.current-version}}
+      shell: bash
+      run: dummyCommandToAbortThisJob

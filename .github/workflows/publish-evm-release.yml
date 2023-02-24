@@ -11,29 +11,6 @@ jobs:
       - uses: actions/checkout@v2
       - uses: ./.github/actions/validate-package-version-and-git-tag
 
-      - name: eraseme
-        run: dummyCommandToAbortThisJob
-
-      - name: Extract version from tag
-        id: juju
-        run: |
-          gitTag=`bash -c '[[ ${{ github.ref }} =~ evm-(.*) ]]; echo ${BASH_REMATCH[1]}'`
-          echo gitTag=$gitTag >> "$GITHUB_OUTPUT"
-
-      - name: get-npm-version
-        id: package-version
-        uses: martinbeentjes/npm-get-version-action@main
-        with:
-          path: evm
-
-      # - name: Compare release tag with package.json version
-      #   id: compare_package_json_version
-      #   run: echo '${{ steps.package-version.outputs.current-version }}'
-
-      - name: abort if tag doesn't match package version
-        if: ${{steps.juju.outputs.gitTag != steps.package-version.outputs.current-version}}
-        run: dummyCommandToAbortThisJob
-
       - name: Install Node.js
         uses: actions/setup-node@v3
         with:

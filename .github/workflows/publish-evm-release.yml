@@ -18,7 +18,7 @@ jobs:
       - uses: actions-ecosystem/action-regex-match@v2
         id: regex-match
         with:
-          text: ${{ github.event.comment.body }}
+          text: ${{ github.ref }}
           regex: '^/refs/tags/evm-(.*)$'          
       
       - name: print match

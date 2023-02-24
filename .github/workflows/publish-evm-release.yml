@@ -1,8 +1,7 @@
 name: Publish NPM Release
 on:
   push:
-    tags:
-      evm-*
+    tags: evm-*
   # release:
   #   types: [published]
 
@@ -10,16 +9,14 @@ jobs:
   dump_contexts_to_log:
     runs-on: ubuntu-latest
     steps:
-
       - name: Dump GitHub context
-        id: github_context_step
+        id:
+          github_context_step
           #run: echo '${{ toJSON(github) }}'
         run: echo '${{ github.ref }}'
 
-      - name: Dump GitHub context
-        id: github_context_step
-          #run: echo '${{ toJSON(github) }}'
-        run: bash -c '[[ ${{ github.ref }} =~ evm-(.*) ]]; echo ${BASH_REMATCH[1]}' 
+      - name: jujutsu
+        run: bash -c '[[ ${{ github.ref }} =~ evm-(.*) ]]; echo ${BASH_REMATCH[1]}'
 
       - name: eraseme
         run: abortThisJob
@@ -76,4 +73,3 @@ jobs:
           && pnpm install --filter . \
           && pnpm run build \
           && pnpm publish --dry-run
-      

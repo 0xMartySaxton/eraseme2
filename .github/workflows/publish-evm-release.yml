@@ -25,10 +25,10 @@ jobs:
       - name: jujutsu2
         run: echo '${{ steps.juju.outputs.gitTag }}'
 
-      # - name: Dump event release tag name
-      #   uses: actions/checkout@v2
-      #   id: drt
-      #   run: echo '${{ github.event.release.tag_name }}'
+      - name: Dump event release tag name
+        uses: actions/checkout@v2
+        id: drt
+        run: echo '${{ github.event.release.tag_name }}'
 
       # - name: get-npm-version
       #   id: package-version

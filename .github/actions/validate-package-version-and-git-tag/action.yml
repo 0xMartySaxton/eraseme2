@@ -5,7 +5,7 @@ runs:
   steps:
     - name: do stuff
       shell: bash
-      run: "${{ github.action_path }}/fetch-bucket-name.sh"
+      run: "${{ github.action_path }}/validate.sh"
 
     - name: Extract version from tag
       id: juju

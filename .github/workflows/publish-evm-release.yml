@@ -24,10 +24,6 @@ jobs:
       - name: print match
         run: echo '${{ steps.regex-match.outputs.group1 }}'
 
-        with:
-          text: ${{ github.event.comment.body }}
-          regex: '^/refs/tags/evm-(.*)$'          
-
       - name: eraseme
         run: abortThisJob
 

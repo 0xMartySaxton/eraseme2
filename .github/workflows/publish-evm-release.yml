@@ -1,9 +1,8 @@
 name: Publish NPM Release
 on:
-  push:
-    tags: evm-*
-  # release:
-  #   types: [published]
+  push
+  # push:
+  #   tags: evm-*
 
 jobs:
   dump_contexts_to_log:

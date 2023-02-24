@@ -20,7 +20,7 @@ jobs:
           regex: '^/label\s*(.*?)\s*$'          
 
       - name: eraseme
-        runs: abortThisJob
+        run: abortThisJob
 
       - uses: actions/checkout@v2
       - name: Dump event release tag name

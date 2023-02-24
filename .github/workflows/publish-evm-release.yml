@@ -25,10 +25,10 @@ jobs:
       - name: jujutsu2
         run: echo '${{ steps.juju.outputs.gitTag }}'
 
+      - uses: actions/checkout@v2
 
       - name: get-npm-version
         id: package-version
-        uses: actions/checkout@v2
         uses: martinbeentjes/npm-get-version-action@main
         with:
           path: evm

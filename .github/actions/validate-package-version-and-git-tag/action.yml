@@ -1,6 +1,7 @@
-name: 'Hello World'
-description: 'Greet someone'
+name: "Hello World"
+description: "Greet someone"
 runs:
-  using: 'composite'
+  using: "composite"
   steps:
     - run: echo Hello
+      shell: bash

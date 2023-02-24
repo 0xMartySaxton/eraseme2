@@ -1,6 +1,6 @@
 {
-  "name": "@fmp/evm",
-  "version": "1.0.0",
+  "name": "@freemarket/evm",
+  "version": "0.0.1",
   "description": "",
   "main": "build/index.js",
   "types": "build/index.d.ts",

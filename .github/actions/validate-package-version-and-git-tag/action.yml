@@ -3,10 +3,10 @@ description: "Greet someone"
 runs:
   using: "composite"
   steps:
-    - name do stuff
+    - name: do stuff
       shell: bash
-      run: '${{ github.action_path }}/fetch-bucket-name.sh'
-      
+      run: "${{ github.action_path }}/fetch-bucket-name.sh"
+
     - name: Extract version from tag
       id: juju
       shell: bash

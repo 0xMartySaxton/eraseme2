@@ -1,7 +1,8 @@
 name: Publish NPM Release
 on:
-  push:
-    tags: evm-*
+  push
+  # push:
+  #   tags: evm-*
   # release:
   #   types: [published]
 
@@ -24,28 +25,28 @@ jobs:
       - name: jujutsu2
         run: echo '${{ steps.juju.outputs.gitTag }}'
 
-      - name: Dump event release tag name
-        uses: actions/checkout@v2
-        id: drt
-        run: echo '${{ github.event.release.tag_name }}'
+      # - name: Dump event release tag name
+      #   uses: actions/checkout@v2
+      #   id: drt
+      #   run: echo '${{ github.event.release.tag_name }}'
 
-      - name: get-npm-version
-        id: package-version
-        uses: martinbeentjes/npm-get-version-action@main
-        with:
-          path: evm
+      # - name: get-npm-version
+      #   id: package-version
+      #   uses: martinbeentjes/npm-get-version-action@main
+      #   with:
+      #     path: evm
 
-      - name: Compare release tag with package.json version
-        id: compare_package_json_version
-        run: echo '${{ steps.package-version.outputs.current-version }}'
+      # - name: Compare release tag with package.json version
+      #   id: compare_package_json_version
+      #   run: echo '${{ steps.package-version.outputs.current-version }}'
 
-      - name: if not match
-        if: ${{github.event.release.tag_name != steps.package-version.outputs.current-version}}
-        run: echo "not match "
+      # - name: if not match
+      #   if: ${{github.event.release.tag_name != steps.package-version.outputs.current-version}}
+      #   run: echo "not match "
 
-      - name: if match
-        if: ${{github.event.release.tag_name == steps.package-version.outputs.current-version}}
-        run: echo "match "
+      # - name: if match
+      #   if: ${{github.event.release.tag_name == steps.package-version.outputs.current-version}}
+      #   run: echo "match "
 
       - name: aasdf
         run: dummyCommandToAbortThisJob

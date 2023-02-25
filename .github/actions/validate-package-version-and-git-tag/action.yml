@@ -1,11 +1,11 @@
 name: "Validate Git Tag Against Package Version"
-description: "Greet someone"
+description: "Validate that a tag prefix matches a pattern and the remainder matches the package version"
 runs:
   using: "composite"
   steps:
-    - name: do stuff
+    - name: validate
       shell: bash
-      run: "${{ github.action_path }}/validate.sh"
+      run: "${{ github.action_path }}/validate.sh refs/tags/evm- ${{github.ref}}"
 
     # - name: Extract version from tag
     #   id: juju

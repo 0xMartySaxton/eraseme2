@@ -1,4 +1,4 @@
-name: Publish NPM Release
+name: Publish evm
 on:
   # push
   push:
@@ -8,6 +8,7 @@ jobs:
   dump_contexts_to_log:
     runs-on: ubuntu-latest
     steps:
+      - run: echo '${{ toJSON(github) }}'
       - uses: actions/checkout@v2
       - uses: ./.github/actions/validate-package-version-and-git-tag
 

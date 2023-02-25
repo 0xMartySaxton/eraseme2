@@ -4,6 +4,7 @@ inputs:
   prefix:
     description: "The expected git ref prefix"
     required: true
+runs:
   using: "composite"
   steps:
     - name: validate

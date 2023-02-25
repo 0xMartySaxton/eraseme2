@@ -1,4 +1,4 @@
-name: "Hello World"
+name: "Validate Git Tag Against Package Version"
 description: "Greet someone"
 runs:
   using: "composite"
@@ -7,30 +7,30 @@ runs:
       shell: bash
       run: "${{ github.action_path }}/validate.sh"
 
-    - name: Extract version from tag
-      id: juju
-      shell: bash
-      run: |
-        gitTag=`bash -c '[[ ${{ github.ref }} =~ evm-(.*) ]]; echo ${BASH_REMATCH[1]}'`
-        echo gitTag=$gitTag >> "$GITHUB_OUTPUT"
+    # - name: Extract version from tag
+    #   id: juju
+    #   shell: bash
+    #   run: |
+    #     gitTag=`bash -c '[[ ${{ github.ref }} =~ evm-(.*) ]]; echo ${BASH_REMATCH[1]}'`
+    #     echo gitTag=$gitTag >> "$GITHUB_OUTPUT"
 
-    - name: get-npm-version
-      id: package-version
-      uses: martinbeentjes/npm-get-version-action@main
-      with:
-        path: evm
+    # - name: get-npm-version
+    #   id: package-version
+    #   uses: martinbeentjes/npm-get-version-action@main
+    #   with:
+    #     path: evm
 
     # - name: Compare release tag with package.json version
     #   id: compare_package_json_version
     #   run: echo '${{ steps.package-version.outputs.current-version }}'
 
-    - name: print versions
-      shell: bash
-      run: |
-        echo gitTag  = ${{steps.juju.outputs.gitTag}}
-        echo package = ${{steps.package-version.outputs.current-version}}
+    # - name: print versions
+    #   shell: bash
+    #   run: |
+    #     echo gitTag  = ${{steps.juju.outputs.gitTag}}
+    #     echo package = ${{steps.package-version.outputs.current-version}}
 
-    - name: abort if tag doesn't match package version
-      if: ${{steps.juju.outputs.gitTag != steps.package-version.outputs.current-version}}
-      shell: bash
-      run: dummyCommandToAbortThisJob
+    # - name: abort if tag doesn't match package version
+    #   if: ${{steps.juju.outputs.gitTag != steps.package-version.outputs.current-version}}
+    #   shell: bash
+    #   run: dummyCommandToAbortThisJob

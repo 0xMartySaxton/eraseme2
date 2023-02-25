@@ -10,7 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          prefix: refs/tags/evm-
+          prefix: "refs/tags/evm-"
 
       - uses: ./.github/actions/validate-package-version-and-git-tag
 

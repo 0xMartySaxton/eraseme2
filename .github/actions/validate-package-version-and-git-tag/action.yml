@@ -9,4 +9,4 @@ runs:
   steps:
     - name: validate
       shell: bash
-      run: "${{ github.action_path }}/validate.sh ${{input.prefix}} ${{github.ref}}"
+      run: "${{ github.action_path }}/validate.sh ${{inputs.prefix}} ${{github.ref}}"
